@@ -22,13 +22,13 @@ export default class Box extends Component {
 
   subscribeToNewFiles = () => {
     const boxId = this.props.match.params.id;
-    const io = socket("https://rocketbox-api.herokuapp.com/api");
+    const io = socket("https://rocketbox-api.herokuapp.com");
 
     io.emit("connectRoom", boxId);
 
     io.on("file", data => {
       this.setState({
-        box: { ...this.state.box, file: [data, ...this.state.box.files] }
+        box: { ...this.state.box, files: [data, ...this.state.box.files] }
       });
     });
   };
